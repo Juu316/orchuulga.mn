@@ -1,2 +1,5 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+<iframe src="/legacy/index.html" title="orchuulga.mn" loading="eager" class="legacy-frame"></iframe>
+
+<style>
+	.legacy-frame { width: 100%; min-height: calc(100vh - 8px); border: 0; display: block; background: #fff; }
+</style>
