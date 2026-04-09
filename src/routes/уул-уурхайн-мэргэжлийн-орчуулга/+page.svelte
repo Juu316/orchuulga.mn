@@ -1,5 +1,5 @@
-<iframe src="/legacy/уул-уурхайн-мэргэжлийн-орчуулга/index.html" title="уул-уурхайн-мэргэжлийн-орчуулга" loading="eager" class="legacy-frame"></iframe>
+<script>
+	import LegacyFrame from '$lib/LegacyFrame.svelte';
+</script>
 
-<style>
-	.legacy-frame { width: 100%; min-height: calc(100vh - 8px); border: 0; display: block; background: #fff; }
-</style>
+<LegacyFrame src="/legacy/уул-уурхайн-мэргэжлийн-орчуулга/index.html" title="уул-уурхайн-мэргэжлийн-орчуулга" />
