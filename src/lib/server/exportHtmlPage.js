@@ -86,7 +86,7 @@ function extractExecutableScripts(bodyInner) {
 	return { html, scripts };
 }
 
-const DEFAULT_ORIGIN = 'https://orchuulga.mn';
+const DEFAULT_ORIGIN = 'https://www.orchuulga.mn';
 
 function siteOrigin() {
 	return (process.env.ORCHUULGA_ORIGIN ?? DEFAULT_ORIGIN).replace(/\/$/, '');

@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://orchuulga.mn/sitemap.xml
+Sitemap: https://www.orchuulga.mn/sitemap.xml

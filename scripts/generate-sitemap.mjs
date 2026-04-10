@@ -1,7 +1,7 @@
 import { existsSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-const origin = (process.env.ORCHUULGA_ORIGIN ?? 'https://orchuulga.mn').replace(/\/$/, '');
+const origin = (process.env.ORCHUULGA_ORIGIN ?? 'https://www.orchuulga.mn').replace(/\/$/, '');
 const routesRoot = join(process.cwd(), 'src', 'routes');
 
 /**
