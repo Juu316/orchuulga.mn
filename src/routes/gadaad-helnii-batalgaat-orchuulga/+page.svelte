@@ -1,5 +1,7 @@
 <script>
-	import LegacyFrame from '$lib/LegacyFrame.svelte';
+	import HtmlPage from '$lib/HtmlPage.svelte';
+
+	let { data } = $props();
 </script>
 
-<LegacyFrame src="/legacy/gadaad-helnii-batalgaat-orchuulga/index.html" title="gadaad-helnii-batalgaat-orchuulga" />
+<HtmlPage page={data.page} />

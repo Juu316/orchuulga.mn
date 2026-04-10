@@ -1,5 +1,7 @@
 <script>
-	import LegacyFrame from '$lib/LegacyFrame.svelte';
+	import HtmlPage from '$lib/HtmlPage.svelte';
+
+	let { data } = $props();
 </script>
 
-<LegacyFrame src="/legacy/english-mongolian-mongolian-english-translation/index.html" title="english-mongolian-mongolian-english-translation" />
+<HtmlPage page={data.page} />

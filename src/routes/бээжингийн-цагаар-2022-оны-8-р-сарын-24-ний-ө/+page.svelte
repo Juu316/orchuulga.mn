@@ -1,5 +1,7 @@
 <script>
-	import LegacyFrame from '$lib/LegacyFrame.svelte';
+	import HtmlPage from '$lib/HtmlPage.svelte';
+
+	let { data } = $props();
 </script>
 
-<LegacyFrame src="/legacy/бээжингийн-цагаар-2022-оны-8-р-сарын-24-ний-ө/index.html" title="бээжингийн-цагаар-2022-оны-8-р-сарын-24-ний-ө" />
+<HtmlPage page={data.page} />

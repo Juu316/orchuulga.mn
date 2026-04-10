@@ -7,3 +7,6 @@ bun.lockb
 
 # Miscellaneous
 /static/
+
+# Large static HTML snapshots (per-route exports)
+**/export.html

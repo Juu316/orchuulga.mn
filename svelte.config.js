@@ -7,8 +7,18 @@ const config = {
 		paths: {
 			relative: false
 		},
+		prerender: {
+			crawl: false,
+			entries: ['*'],
+			concurrency: 2,
+			handleMissingId: 'ignore',
+			/** Safety net if crawl is enabled later: legacy HTML references WordPress oEmbed URLs. */
+			handleHttpError: ({ status, path }) => {
+				if (status === 404 && (path === '/wp-json' || path.includes('/wp-json/'))) return;
+			}
+		},
 		adapter: adapter({
-			// see below for options that can be set here
+			runtime: 'nodejs22.x'
 		})
 	}
 };

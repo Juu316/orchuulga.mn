@@ -1,15 +1,11 @@
-/* Shell for legacy iframe — keep this minimal. Avoid display:contents on the wrapper (Safari). */
+/* Shell around inlined legacy HTML — keep this minimal. Avoid display:contents on the wrapper (Safari). */
 html,
 body {
 	margin: 0;
-}
-
-body {
-	overflow: hidden;
 }
 
 .sveltekit-body {
 	display: block;
 }
 
-/* Page styling comes from mirrored WordPress CSS inside the iframe. */
+/* Page styling comes from mirrored WordPress CSS in the legacy markup. */
