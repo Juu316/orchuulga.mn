@@ -149,9 +149,26 @@ export function parseExportedHtml(html, pathname, origin) {
  * @param {string} importMetaUrl
  */
 export function loadExportFromCurrentDir(event, importMetaUrl) {
-	const dir = dirname(fileURLToPath(importMetaUrl));
-	const filePath = join(dir, 'export.html');
-	if (!existsSync(filePath)) {
+	const moduleDir = dirname(fileURLToPath(importMetaUrl));
+	const routeId = event.route?.id ?? '';
+	const routePartsFromId = routeId.replace(/^\/+|\/+$/g, '').split('/').filter(Boolean);
+	const routePartsFromPath = pathnameToParts(event.url.pathname).map((p) => {
+		try {
+			return decodeURIComponent(p);
+		} catch {
+			return p;
+		}
+	});
+	const routeParts = routePartsFromId.length ? routePartsFromId : routePartsFromPath;
+
+	/** @type {string[]} */
+	const candidatePaths = [
+		join(moduleDir, 'export.html'),
+		join(process.cwd(), 'src', 'routes', ...routeParts, 'export.html')
+	];
+
+	const filePath = candidatePaths.find((p) => existsSync(p));
+	if (!filePath) {
 		throw error(404, 'Not found');
 	}
 	const raw = readFileSync(filePath, 'utf8');
