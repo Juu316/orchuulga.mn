@@ -12,6 +12,7 @@
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
+	<meta name="facebook-domain-verification" content="49ot0otpppvhc9r39ca4f8fq8ihveh" />
 </svelte:head>
 
 {@render children()}
