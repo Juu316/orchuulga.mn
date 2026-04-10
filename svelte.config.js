@@ -18,7 +18,8 @@ const config = {
 			}
 		},
 		adapter: adapter({
-			runtime: 'nodejs22.x'
+			runtime: 'nodejs22.x',
+			includeFiles: ['src/routes/**/export.html']
 		})
 	}
 };
