@@ -46,6 +46,13 @@
 <svelte:head>
 	{#if page?.meta?.title}
 		<title>{page.meta.title}</title>
+		<meta property="og:title" content={page.meta.title} />
+		<meta name="twitter:title" content={page.meta.title} />
+	{/if}
+	{#if page?.meta?.description}
+		<meta name="description" content={page.meta.description} />
+		<meta property="og:description" content={page.meta.description} />
+		<meta name="twitter:description" content={page.meta.description} />
 	{/if}
 	{#if page?.meta?.canonicalUrl}
 		<link rel="canonical" href={page.meta.canonicalUrl} />

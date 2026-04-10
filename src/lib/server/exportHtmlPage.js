@@ -62,7 +62,42 @@ function absolutizeMetaUrls(headHtml, origin) {
 function stripConflictingSeoTags(headHtml) {
 	return headHtml
 		.replace(/<link[^>]*\srel=["']canonical["'][^>]*>/gi, '')
-		.replace(/<meta[^>]*\sproperty=["']og:url["'][^>]*>/gi, '');
+		.replace(/<meta[^>]*\sproperty=["']og:url["'][^>]*>/gi, '')
+		.replace(/<meta[^>]*\sname=["']description["'][^>]*>/gi, '')
+		.replace(/<meta[^>]*\sproperty=["']og:title["'][^>]*>/gi, '')
+		.replace(/<meta[^>]*\sproperty=["']og:description["'][^>]*>/gi, '')
+		.replace(/<meta[^>]*\sname=["']twitter:title["'][^>]*>/gi, '')
+		.replace(/<meta[^>]*\sname=["']twitter:description["'][^>]*>/gi, '');
+}
+
+/**
+ * Normalize locale-related head metadata for Mongolian audience.
+ * @param {string} headHtml
+ */
+function normalizeLocaleSeo(headHtml) {
+	return headHtml
+		.replace(
+			/<meta([^>]*\bproperty=["']og:locale["'][^>]*\bcontent=["'])en_US(["'][^>]*)>/gi,
+			'<meta$1mn_MN$2>'
+		)
+		.replace(/"inLanguage":"en-US"/g, '"inLanguage":"mn-MN"');
+}
+
+/**
+ * @param {string} pathname
+ * @param {{ title: string, description: string }} meta
+ */
+function preferredSeoMeta(pathname, meta) {
+	const canonicalPath = canonicalPathFromPathname(pathname);
+	if (canonicalPath === '/') {
+		return {
+			title:
+				'Мэргэжлийн баталгаат орчуулгын товчоо | Англи, Хятад, Орос, Солонгос, Япон | orchuulga.mn',
+			description:
+				'Мэргэжлийн баталгаат болон онлайн орчуулга, апостиль, нотариатын үйлчилгээ. Англи, Хятад, Орос, Солонгос, Япон, Герман зэрэг хэлний орчуулгыг хурдан, найдвартай гүйцэтгэнэ.'
+		};
+	}
+	return meta;
 }
 
 /**
@@ -113,6 +148,7 @@ export function parseExportedHtml(html, pathname, origin) {
 
 	headInner = stripConflictingSeoTags(headInner);
 	headInner = absolutizeMetaUrls(headInner, origin);
+	headInner = normalizeLocaleSeo(headInner);
 
 	const titleMatch = html.match(/<title>([\s\S]*?)<\/title>/i);
 	const title = decodeHtmlEntities(titleMatch?.[1]?.trim() ?? 'orchuulga.mn');
@@ -125,6 +161,7 @@ export function parseExportedHtml(html, pathname, origin) {
 	const { html: bodyHtml, scripts } = extractExecutableScripts(bodyInner);
 
 	const canonicalPath = canonicalPathFromPathname(pathname);
+	const preferredMeta = preferredSeoMeta(pathname, { title, description });
 	const canonicalUrl = origin.replace(/\/$/, '') + canonicalPath;
 
 	const bodyClassMatch = bodyAttrs.match(/\bclass\s*=\s*["']([^"']*)["']/i);
@@ -136,8 +173,8 @@ export function parseExportedHtml(html, pathname, origin) {
 		scripts,
 		bodyClass,
 		meta: {
-			title,
-			description,
+			title: preferredMeta.title,
+			description: preferredMeta.description,
 			canonicalUrl,
 			canonicalPath
 		}
