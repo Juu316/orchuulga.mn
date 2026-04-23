@@ -10,6 +10,7 @@ import svelteConfig from './svelte.config.js';
 const gitignorePath = path.resolve(import.meta.dirname, '.gitignore');
 
 export default defineConfig([
+	{ ignores: ['static/wp-includes/**'] },
 	includeIgnoreFile(gitignorePath),
 	js.configs.recommended,
 	svelte.configs.recommended,
