@@ -17,6 +17,7 @@ const config = {
 				if (status === 404 && (path === '/wp-json' || path.includes('/wp-json/'))) return;
 			}
 		},
+	
 		adapter: adapter()
 	}
 };
