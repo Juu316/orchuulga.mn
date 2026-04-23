@@ -1,4 +1,4 @@
-import adapter from '@sveltejs/adapter-vercel';
+import adapter from '@sveltejs/adapter-node';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -17,10 +17,7 @@ const config = {
 				if (status === 404 && (path === '/wp-json' || path.includes('/wp-json/'))) return;
 			}
 		},
-		adapter: adapter({
-			runtime: 'nodejs22.x',
-			includeFiles: ['src/routes/**/export.html']
-		})
+		adapter: adapter()
 	}
 };
 
